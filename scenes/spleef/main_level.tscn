@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b43ch4gg6sfm5"]
+
+[ext_resource type="PackedScene" uid="uid://cvoa31bo13ji3" path="res://scenes/spleef/spleef_player/spleef_player.tscn" id="1_m3gfw"]
+[ext_resource type="Script" uid="uid://82wn7o01y8b6" path="res://scenes/spleef/main_level.gd" id="1_vrtma"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ynsf8"]
+
+[node name="Node2D" type="Node2D" unique_id=718055649]
+script = ExtResource("1_vrtma")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1350686979]
+position = Vector2(0, 165)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1403602639]
+shape = SubResource("WorldBoundaryShape2D_ynsf8")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1504348723]
+zoom = Vector2(1.79, 1.79)
+
+[node name="SpleefPlayer" parent="." unique_id=1982280743 instance=ExtResource("1_m3gfw")]
+position = Vector2(-126, -114)
+
+[node name="SpleefPlayer2" parent="." unique_id=937612222 instance=ExtResource("1_m3gfw")]
+modulate = Color(6.545782e-06, 0.7211991, 0.9919042, 1)
+position = Vector2(146, -114)
+player_num = 2

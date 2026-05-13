@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dfdklie5bouaj"]
+
+[ext_resource type="Texture2D" uid="uid://cs01mkq0ehmp8" path="res://assets/textures/ChillPlayerIcon.png" id="1_3e7sy"]
+[ext_resource type="Script" uid="uid://dd3khpn11env6" path="res://scenes/spleef/spleef_projectile/spleef_projectile.gd" id="1_v6iv5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v6iv5"]
+radius = 200.0
+
+[node name="SpleefProjectile" type="CharacterBody2D" unique_id=1817501288]
+collision_layer = 0
+script = ExtResource("1_v6iv5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1567271104]
+scale = Vector2(0.02, 0.02)
+shape = SubResource("CircleShape2D_v6iv5")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=2091164879]
+texture = ExtResource("1_3e7sy")

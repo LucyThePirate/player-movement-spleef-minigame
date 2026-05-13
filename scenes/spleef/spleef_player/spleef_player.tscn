@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cvoa31bo13ji3"]
+
+[ext_resource type="Texture2D" uid="uid://cvbgyok8j0igm" path="res://assets/textures/Prezzy/prezzySprite.png" id="1_e24y6"]
+[ext_resource type="Script" uid="uid://j2dpu78lrl28" path="res://scenes/spleef/spleef_player/spleef_player.gd" id="1_evkmm"]
+[ext_resource type="PackedScene" uid="uid://dfdklie5bouaj" path="res://scenes/spleef/spleef_projectile/spleef_projectile.tscn" id="2_ct3br"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xs056"]
+
+[node name="SpleefPlayer" type="CharacterBody2D" unique_id=1982280743]
+script = ExtResource("1_evkmm")
+projectile_scene = ExtResource("2_ct3br")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2134808737]
+shape = SubResource("CapsuleShape2D_xs056")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=53203061]
+unique_name_in_owner = true
+texture = ExtResource("1_e24y6")
