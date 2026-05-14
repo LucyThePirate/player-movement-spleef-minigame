@@ -1,26 +1,149 @@
-[gd_scene format=3 uid="uid://b43ch4gg6sfm5"]
+[gd_scene format=4 uid="uid://b43ch4gg6sfm5"]
 
 [ext_resource type="PackedScene" uid="uid://cvoa31bo13ji3" path="res://scenes/spleef/spleef_player/spleef_player.tscn" id="1_m3gfw"]
 [ext_resource type="Script" uid="uid://82wn7o01y8b6" path="res://scenes/spleef/main_level.gd" id="1_vrtma"]
+[ext_resource type="Texture2D" uid="uid://6jwpf1th68hi" path="res://assets/textures/mirror2.png" id="2_58tii"]
+[ext_resource type="PackedScene" uid="uid://bhi3ugo5q5740" path="res://scenes/spleef/ice_block/ice_block.tscn" id="2_2028w"]
+[ext_resource type="FontFile" uid="uid://dbedob14hbam3" path="res://assets/PermanentMarkerPermanentConsequences.ttf" id="3_ciq3g"]
+[ext_resource type="Texture2D" uid="uid://jrb1g8ilpbxp" path="res://assets/textures/tiles/ChimeraTiles.png" id="3_tfj41"]
+[ext_resource type="AudioStream" uid="uid://cqv6lx4qgfwsm" path="res://assets/audio/SFX/159768__timgormly__cowbell_rattle_4.ogg" id="7_f1kru"]
+[ext_resource type="AudioStream" uid="uid://db3ucyknego2l" path="res://assets/audio/SFX/159768__timgormly__cowbell_rattle_3.ogg" id="8_08aef"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ynsf8"]
 
+[sub_resource type="Theme" id="Theme_2028w"]
+default_font = ExtResource("3_ciq3g")
+RichTextLabel/constants/outline_size = 6
+RichTextLabel/constants/shadow_offset_x = 3
+RichTextLabel/constants/shadow_offset_y = 3
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tfj41"]
+texture = ExtResource("3_tfj41")
+texture_region_size = Vector2i(100, 100)
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:2/size_in_atlas = Vector2i(1, 2)
+3:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ciq3g"]
+tile_size = Vector2i(100, 100)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/1 = SubResource("TileSetAtlasSource_tfj41")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f1kru"]
+
 [node name="Node2D" type="Node2D" unique_id=718055649]
 script = ExtResource("1_vrtma")
+ice_block_scene = ExtResource("2_2028w")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=31132346]
+texture_repeat = 2
+position = Vector2(8, -135)
+scale = Vector2(0.53240734, 0.53240734)
+texture = ExtResource("2_58tii")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1350686979]
-position = Vector2(0, 165)
+position = Vector2(0, 141)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1403602639]
 shape = SubResource("WorldBoundaryShape2D_ynsf8")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1504348723]
-zoom = Vector2(1.79, 1.79)
+position = Vector2(0, -80)
+zoom = Vector2(2.79, 2.79)
+
+[node name="Label" type="RichTextLabel" parent="Camera2D" unique_id=1906430241]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -74.0
+offset_top = -165.0
+offset_right = 74.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_2028w")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave]
+Get Ready...
+"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SpleefPlayer" parent="." unique_id=1982280743 instance=ExtResource("1_m3gfw")]
-position = Vector2(-126, -114)
+position = Vector2(-126, -185)
 
 [node name="SpleefPlayer2" parent="." unique_id=937612222 instance=ExtResource("1_m3gfw")]
-modulate = Color(6.545782e-06, 0.7211991, 0.9919042, 1)
-position = Vector2(146, -114)
+modulate = Color(0.49019608, 1, 1, 0.99215686)
+position = Vector2(146, -185)
 player_num = 2
+
+[node name="Tiles" type="TileMapLayer" parent="." unique_id=16872104]
+unique_name_in_owner = true
+position = Vector2(-190, -196)
+scale = Vector2(0.30685762, 0.30685762)
+tile_map_data = PackedByteArray("AAD//wEAAQACAAAAAAD//wAAAQACAAAAAAAMAAEAAQACAAAAAAAMAAAAAQACAAAAAAAAAAEAAQACAAAAAAABAAEAAQACAAAAAAACAAEAAQACAAAAAAADAAEAAQACAAAAAAAEAAEAAQACAAAAAAAFAAEAAQACAAAAAAAGAAEAAQACAAAAAAAHAAEAAQACAAAAAAAIAAEAAQACAAAAAAAJAAEAAQACAAAAAAAKAAEAAQACAAAAAAALAAEAAQACAAAAAAD/////AQACAAAAAAAMAP//AQACAAAAAAAMAP7/AQACAAAAAAD///7/AQACAAAAAAD//wkAAQABAAEAAAD//woAAQABAAEAAAAAAAoAAQABAAEAAAABAAoAAQABAAEAAAACAAoAAQABAAEAAAADAAoAAQABAAEAAAAEAAoAAQABAAEAAAAFAAoAAQABAAEAAAAGAAoAAQABAAEAAAAHAAoAAQABAAEAAAAIAAoAAQABAAEAAAAJAAoAAQABAAEAAAAKAAoAAQABAAEAAAALAAoAAQABAAEAAAAMAAoAAQABAAEAAAAMAAkAAQABAAEAAAAAAAkAAQABAAEAAAABAAkAAQABAAEAAAACAAkAAQABAAEAAAADAAkAAQABAAEAAAAEAAkAAQABAAEAAAAFAAkAAQABAAEAAAAGAAkAAQABAAEAAAAHAAkAAQABAAEAAAAIAAkAAQABAAEAAAAJAAkAAQABAAEAAAAKAAkAAQABAAEAAAALAAkAAQABAAEAAAD7//7/AQABAAAAAAD7////AQABAAAAAAD7/wAAAQABAAAAAAD7/wEAAQABAAAAAAD7/wIAAQABAAAAAAD7/wMAAQABAAAAAAD7/wQAAQABAAAAAAD7/wUAAQABAAAAAAD7/wYAAQABAAAAAAD7/wcAAQABAAAAAAD7/wgAAQABAAAAAAD7/wkAAQABAAAAAAD7/woAAQABAAAAAAD8//7/AQABAAAAAAD8////AQABAAAAAAD8/wAAAQABAAAAAAD8/wEAAQABAAAAAAD8/wIAAQABAAAAAAD8/wMAAQABAAAAAAD8/wQAAQABAAAAAAD8/wUAAQABAAAAAAD8/wYAAQABAAAAAAD8/wcAAQABAAAAAAD8/wgAAQABAAAAAAD8/wkAAQABAAAAAAD8/woAAQABAAAAAAD9//7/AQACAAAAAAD9////AQACAAAAAAD9/wAAAQACAAAAAAD9/wEAAQACAAAAAAD9/wkAAQABAAEAAAD9/woAAQABAAEAAAD+//7/AQACAAAAAAD+////AQACAAAAAAD+/wAAAQACAAAAAAD+/wEAAQACAAAAAAD+/wkAAQABAAEAAAD+/woAAQABAAEAAAANAP7/AQACAAAAAAANAP//AQACAAAAAAANAAAAAQACAAAAAAANAAEAAQACAAAAAAANAAkAAQABAAEAAAANAAoAAQABAAEAAAAOAP7/AQACAAAAAAAOAP//AQACAAAAAAAOAAAAAQACAAAAAAAOAAEAAQACAAAAAAAOAAkAAQABAAEAAAAOAAoAAQABAAEAAAAPAP7/AQABAAAAAAAPAP//AQABAAAAAAAPAAAAAQABAAAAAAAPAAEAAQABAAAAAAAPAAIAAQABAAAAAAAPAAMAAQABAAAAAAAPAAQAAQABAAAAAAAPAAUAAQABAAAAAAAPAAYAAQABAAAAAAAPAAcAAQABAAAAAAAPAAgAAQABAAAAAAAPAAkAAQABAAAAAAAPAAoAAQABAAAAAAAQAP7/AQABAAAAAAAQAP//AQABAAAAAAAQAAAAAQABAAAAAAAQAAEAAQABAAAAAAAQAAIAAQABAAAAAAAQAAMAAQABAAAAAAAQAAQAAQABAAAAAAAQAAUAAQABAAAAAAAQAAYAAQABAAAAAAAQAAcAAQABAAAAAAAQAAgAAQABAAAAAAAQAAkAAQABAAAAAAAQAAoAAQABAAAAAAD7//r/AQABAAAAAAD7//v/AQABAAAAAAD7//z/AQABAAAAAAD7//3/AQABAAAAAAD8//r/AQABAAAAAAD8//v/AQABAAAAAAD8//z/AQABAAAAAAD8//3/AQABAAAAAAD9//r/AQABAAAAAAD9//v/AQABAAAAAAD9//z/AQABAAAAAAD9//3/AQABAAAAAAD+//r/AQABAAAAAAD+//v/AQABAAAAAAD+//z/AQABAAAAAAD+//3/AQABAAAAAAD///r/AQABAAAAAAD///v/AQABAAAAAAD///z/AQABAAAAAAD///3/AQABAAAAAAAAAPr/AQABAAAAAAAAAPv/AQABAAAAAAAAAPz/AQABAAAAAAAAAP3/AQABAAAAAAABAPr/AQABAAAAAAABAPv/AQABAAAAAAABAPz/AQABAAAAAAABAP3/AQABAAAAAAACAPr/AQABAAAAAAACAPv/AQABAAAAAAACAPz/AQABAAAAAAACAP3/AQABAAAAAAADAPr/AQABAAAAAAADAPv/AQABAAAAAAADAPz/AQABAAAAAAADAP3/AQABAAAAAAAEAPr/AQABAAAAAAAEAPv/AQABAAAAAAAEAPz/AQABAAAAAAAEAP3/AQABAAAAAAAFAPr/AQABAAAAAAAFAPv/AQABAAAAAAAFAPz/AQABAAAAAAAFAP3/AQABAAAAAAAGAPr/AQABAAAAAAAGAPv/AQABAAAAAAAGAPz/AQABAAAAAAAGAP3/AQABAAAAAAAHAPr/AQABAAAAAAAHAPv/AQABAAAAAAAHAPz/AQABAAAAAAAHAP3/AQABAAAAAAAIAPr/AQABAAAAAAAIAPv/AQABAAAAAAAIAPz/AQABAAAAAAAIAP3/AQABAAAAAAAJAPr/AQABAAAAAAAJAPv/AQABAAAAAAAJAPz/AQABAAAAAAAJAP3/AQABAAAAAAAKAPr/AQABAAAAAAAKAPv/AQABAAAAAAAKAPz/AQABAAAAAAAKAP3/AQABAAAAAAALAPr/AQABAAAAAAALAPv/AQABAAAAAAALAPz/AQABAAAAAAALAP3/AQABAAAAAAAMAPr/AQABAAAAAAAMAPv/AQABAAAAAAAMAPz/AQABAAAAAAAMAP3/AQABAAAAAAANAPr/AQABAAAAAAANAPv/AQABAAAAAAANAPz/AQABAAAAAAANAP3/AQABAAAAAAAOAPr/AQABAAAAAAAOAPv/AQABAAAAAAAOAPz/AQABAAAAAAAOAP3/AQABAAAAAAAPAPr/AQABAAAAAAAPAPv/AQABAAAAAAAPAPz/AQABAAAAAAAPAP3/AQABAAAAAAAQAPr/AQABAAAAAAAQAPv/AQABAAAAAAAQAPz/AQABAAAAAAAQAP3/AQABAAAAAAD//wQAAQACAAEAAAD//wUAAQACAAEAAAD//wYAAQACAAEAAAD//wcAAQACAAEAAAAAAAQAAQACAAEAAAAAAAUAAQACAAEAAAAAAAYAAQACAAEAAAAAAAcAAQACAAEAAAABAAQAAQACAAEAAAABAAUAAQACAAEAAAABAAYAAQACAAEAAAABAAcAAQACAAEAAAACAAQAAQACAAEAAAACAAUAAQACAAEAAAACAAYAAQACAAEAAAACAAcAAQACAAEAAAADAAQAAQACAAEAAAADAAUAAQACAAEAAAADAAYAAQACAAEAAAADAAcAAQACAAEAAAAEAAQAAQACAAEAAAAEAAUAAQACAAEAAAAEAAYAAQACAAEAAAAEAAcAAQACAAEAAAAFAAQAAQACAAEAAAAFAAUAAQACAAEAAAAFAAYAAQACAAEAAAAFAAcAAQACAAEAAAAGAAQAAQACAAEAAAAGAAUAAQACAAEAAAAGAAYAAQACAAEAAAAGAAcAAQACAAEAAAAHAAQAAQACAAEAAAAHAAUAAQACAAEAAAAHAAYAAQACAAEAAAAHAAcAAQACAAEAAAAIAAQAAQACAAEAAAAIAAUAAQACAAEAAAAIAAYAAQACAAEAAAAIAAcAAQACAAEAAAAJAAQAAQACAAEAAAAJAAUAAQACAAEAAAAJAAYAAQACAAEAAAAJAAcAAQACAAEAAAAKAAQAAQACAAEAAAAKAAUAAQACAAEAAAAKAAYAAQACAAEAAAAKAAcAAQACAAEAAAALAAQAAQACAAEAAAALAAUAAQACAAEAAAALAAYAAQACAAEAAAALAAcAAQACAAEAAAAMAAQAAQACAAEAAAAMAAUAAQACAAEAAAAMAAYAAQACAAEAAAAMAAcAAQACAAEAAAA=")
+tile_set = SubResource("TileSet_ciq3g")
+
+[node name="StartTimer" type="Timer" parent="." unique_id=822617238]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="HideGoTextTimer" type="Timer" parent="." unique_id=750845782]
+unique_name_in_owner = true
+process_callback = 0
+one_shot = true
+
+[node name="RestartGameTimer" type="Timer" parent="." unique_id=1181147401]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 3.0
+one_shot = true
+
+[node name="Lava" type="Area2D" parent="." unique_id=1305641775]
+position = Vector2(0, 86)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lava" unique_id=1566722295]
+position = Vector2(-6, 25.5)
+shape = SubResource("WorldBoundaryShape2D_f1kru")
+
+[node name="GetReadySFX" type="AudioStreamPlayer2D" parent="." unique_id=240709098]
+unique_name_in_owner = true
+stream = ExtResource("7_f1kru")
+volume_db = 1.944
+pitch_scale = 0.81
+
+[node name="GoSFX" type="AudioStreamPlayer2D" parent="." unique_id=1348854805]
+unique_name_in_owner = true
+stream = ExtResource("8_08aef")
+volume_db = 1.944
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="HideGoTextTimer" to="." method="_on_hide_go_text_timer_timeout"]
+[connection signal="timeout" from="RestartGameTimer" to="." method="_on_restart_game_timer_timeout"]
+[connection signal="body_entered" from="Lava" to="." method="_on_lava_body_entered"]
+
+[editable path="SpleefPlayer2"]

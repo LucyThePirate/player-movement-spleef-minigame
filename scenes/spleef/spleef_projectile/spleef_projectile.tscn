@@ -2,9 +2,21 @@
 
 [ext_resource type="Texture2D" uid="uid://cs01mkq0ehmp8" path="res://assets/textures/ChillPlayerIcon.png" id="1_3e7sy"]
 [ext_resource type="Script" uid="uid://dd3khpn11env6" path="res://scenes/spleef/spleef_projectile/spleef_projectile.gd" id="1_v6iv5"]
+[ext_resource type="AudioStream" uid="uid://c2i7b7vgi48c0" path="res://assets/audio/SFX/snowball-smash-1-36743.mp3" id="3_0x5to"]
+[ext_resource type="AudioStream" uid="uid://cne3fxhh73wqe" path="res://assets/audio/SFX/highpop.wav" id="4_0x5to"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v6iv5"]
 radius = 200.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0x5to"]
+random_pitch = 1.0656005
+streams_count = 1
+stream_0/stream = ExtResource("3_0x5to")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kh00k"]
+random_pitch = 1.0656005
+streams_count = 1
+stream_0/stream = ExtResource("4_0x5to")
 
 [node name="SpleefProjectile" type="CharacterBody2D" unique_id=1817501288]
 collision_layer = 0
@@ -16,3 +28,18 @@ shape = SubResource("CircleShape2D_v6iv5")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=2091164879]
 texture = ExtResource("1_3e7sy")
+
+[node name="ProjectilePreviewLine" type="Line2D" parent="." unique_id=1615958495]
+unique_name_in_owner = true
+width = 1.0
+
+[node name="ImpactSFX" type="AudioStreamPlayer2D" parent="." unique_id=334970208]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_0x5to")
+pitch_scale = 1.71
+
+[node name="BounceSFX" type="AudioStreamPlayer2D" parent="." unique_id=1769203153]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_kh00k")
+volume_db = -5.832
+pitch_scale = 1.37

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bhi3ugo5q5740"]
+
+[ext_resource type="Texture2D" uid="uid://jrb1g8ilpbxp" path="res://assets/textures/tiles/ChimeraTiles.png" id="1_glruj"]
+[ext_resource type="Script" uid="uid://ccwi2d32om6ca" path="res://scenes/spleef/ice_block/ice_block.gd" id="1_wegtn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_du1kx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wegtn"]
+atlas = ExtResource("1_glruj")
+region = Rect2(200, 100, 100, 100)
+
+[node name="IceBlock" type="StaticBody2D" unique_id=861653759]
+collision_mask = 0
+script = ExtResource("1_wegtn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=783395822]
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_du1kx")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=914333450]
+scale = Vector2(0.19736892, 0.19736892)
+texture = SubResource("AtlasTexture_wegtn")

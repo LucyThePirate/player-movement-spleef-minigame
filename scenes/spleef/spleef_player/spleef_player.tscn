@@ -3,10 +3,78 @@
 [ext_resource type="Texture2D" uid="uid://cvbgyok8j0igm" path="res://assets/textures/Prezzy/prezzySprite.png" id="1_e24y6"]
 [ext_resource type="Script" uid="uid://j2dpu78lrl28" path="res://scenes/spleef/spleef_player/spleef_player.gd" id="1_evkmm"]
 [ext_resource type="PackedScene" uid="uid://dfdklie5bouaj" path="res://scenes/spleef/spleef_projectile/spleef_projectile.tscn" id="2_ct3br"]
+[ext_resource type="AudioStream" uid="uid://it2n661alwk5" path="res://assets/audio/SFX/492027__crinkem__blow-dart.wav" id="4_dfnoe"]
+[ext_resource type="AudioStream" uid="uid://ukjsno82ifi7" path="res://assets/audio/SFX/659007__bigdino1995__chargeup.ogg" id="5_7fcbt"]
+[ext_resource type="AudioStream" uid="uid://c47x04jbibcqf" path="res://assets/audio/SFX/jump.wav" id="6_trqqb"]
+[ext_resource type="AudioStream" uid="uid://kmc2vpcjim2u" path="res://assets/audio/SFX/peasint_cough1.wav" id="6_uohuh"]
+[ext_resource type="AudioStream" uid="uid://c0ojrhxdh3nkq" path="res://assets/audio/SFX/peasint_cough2.wav" id="7_trqqb"]
+[ext_resource type="AudioStream" uid="uid://dgldagpedskcp" path="res://assets/audio/SFX/peasint_cough3.wav" id="8_stj0r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xs056"]
 
+[sub_resource type="Animation" id="Animation_ct3br"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dfnoe"]
+resource_name = "invulnerability_flashing"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.5254902), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7fcbt"]
+_data = {
+&"RESET": SubResource("Animation_ct3br"),
+&"invulnerability_flashing": SubResource("Animation_dfnoe")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ct3br"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfnoe"]
+bg_color = Color(0.99999994, 0.7920143, 0.18122631, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uohuh"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("5_7fcbt")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_stj0r"]
+random_pitch = 1.0656005
+streams_count = 1
+stream_0/stream = ExtResource("6_trqqb")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yrx43"]
+random_pitch = 1.0656005
+streams_count = 3
+stream_0/stream = ExtResource("6_uohuh")
+stream_1/stream = ExtResource("7_trqqb")
+stream_2/stream = ExtResource("8_stj0r")
+
 [node name="SpleefPlayer" type="CharacterBody2D" unique_id=1982280743]
+modulate = Color(1, 1, 1, 0.9940536)
 script = ExtResource("1_evkmm")
 projectile_scene = ExtResource("2_ct3br")
 
@@ -15,4 +83,58 @@ shape = SubResource("CapsuleShape2D_xs056")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=53203061]
 unique_name_in_owner = true
+position = Vector2(0, -1)
 texture = ExtResource("1_e24y6")
+
+[node name="StunnedTimer" type="Timer" parent="." unique_id=429988171]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="InvincibilityTimer" type="Timer" parent="." unique_id=47888177]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.75
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1893318541]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_7fcbt")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1017668189]
+unique_name_in_owner = true
+offset_left = -15.0
+offset_top = -23.0
+offset_right = 15.0
+offset_bottom = -16.84
+theme_override_styles/background = SubResource("StyleBoxFlat_ct3br")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dfnoe")
+min_value = 1.0
+max_value = 9.0
+value = 1.0
+show_percentage = false
+
+[node name="ShootSFX" type="AudioStreamPlayer2D" parent="." unique_id=1505012870]
+unique_name_in_owner = true
+stream = ExtResource("4_dfnoe")
+volume_db = 9.02
+
+[node name="ChargeSFX" type="AudioStreamPlayer2D" parent="." unique_id=781126444]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_uohuh")
+volume_db = -1.944
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="." unique_id=429097238]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_stj0r")
+volume_db = -1.944
+pitch_scale = 2.34
+
+[node name="StunnedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1060005091]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_yrx43")
+volume_db = 3.943
+
+[connection signal="timeout" from="StunnedTimer" to="." method="_on_stunned_timer_timeout"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
