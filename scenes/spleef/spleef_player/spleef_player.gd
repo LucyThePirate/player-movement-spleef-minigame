@@ -64,7 +64,7 @@ func _idle_process(delta: float) -> void:
 		%Sprite2D.flip_h = input_dir > 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	move_and_slide()
+	_check_for_touching_ice(delta)
 	
 	# Handle charging a projectile
 	if Input.is_action_pressed("action%s" % player_num):
@@ -98,7 +98,7 @@ func _stunned_process(delta: float) -> void:
 		velocity += get_gravity() * GRAVITY_SCALE * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 0.01)
-	move_and_slide()
+	_check_for_touching_ice(delta)
 
 func on_hit_by_projectile(thrown_direction, power):
 	if invulnerable:
@@ -107,6 +107,12 @@ func on_hit_by_projectile(thrown_direction, power):
 		velocity.x = thrown_direction * power * 15
 		velocity.y -= power * 10
 		_stunned_ready()
+
+func _check_for_touching_ice(delta):
+	if move_and_slide():
+		var colliding_body = get_last_slide_collision().get_collider()
+		if colliding_body is IceBlock:
+			colliding_body.on_player_touched_ice(delta)
 
 
 func _on_stunned_timer_timeout() -> void:

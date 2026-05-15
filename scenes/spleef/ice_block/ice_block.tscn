@@ -18,5 +18,8 @@ scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_du1kx")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=914333450]
+unique_name_in_owner = true
+position = Vector2(0, -10.000001)
 scale = Vector2(0.19736892, 0.19736892)
 texture = SubResource("AtlasTexture_wegtn")
+offset = Vector2(0, 50.666542)
