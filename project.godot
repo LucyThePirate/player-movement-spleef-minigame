@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [display]
 
 window/size/mode=2
+window/stretch/mode="viewport"
 
 [input]
 
@@ -85,3 +86,5 @@ action2={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

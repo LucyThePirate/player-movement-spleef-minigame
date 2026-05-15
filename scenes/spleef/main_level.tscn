@@ -42,7 +42,7 @@ texture_region_size = Vector2i(100, 100)
 
 [sub_resource type="TileSet" id="TileSet_ciq3g"]
 tile_size = Vector2i(100, 100)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 0
 sources/1 = SubResource("TileSetAtlasSource_tfj41")
 
@@ -60,6 +60,7 @@ texture = ExtResource("2_58tii")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1350686979]
 position = Vector2(0, 141)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1403602639]
 shape = SubResource("WorldBoundaryShape2D_ynsf8")

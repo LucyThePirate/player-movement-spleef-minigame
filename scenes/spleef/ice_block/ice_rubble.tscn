@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://d14stouc1dk6b"]
+
+[ext_resource type="Script" uid="uid://dt5xaho4ihh46" path="res://scenes/spleef/ice_block/ice_rubble.gd" id="1_8m66i"]
+[ext_resource type="Texture2D" uid="uid://jrb1g8ilpbxp" path="res://assets/textures/tiles/ChimeraTiles.png" id="1_tuclb"]
+[ext_resource type="AudioStream" uid="uid://cl2kq1nhod7mn" path="res://assets/audio/SFX/ice_block/rubble_ice1.wav" id="2_3s5qg"]
+[ext_resource type="AudioStream" uid="uid://bmejf8oj72x1h" path="res://assets/audio/SFX/ice_block/rubble_ice2.wav" id="3_8m66i"]
+[ext_resource type="AudioStream" uid="uid://cpafnwoh2d3xy" path="res://assets/audio/SFX/ice_block/rubble_ice3.wav" id="4_j8s7c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tuclb"]
+radius = 2.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hsftk"]
+random_pitch = 1.0656005
+streams_count = 3
+stream_0/stream = ExtResource("2_3s5qg")
+stream_1/stream = ExtResource("3_8m66i")
+stream_2/stream = ExtResource("4_j8s7c")
+
+[node name="IceRubble" type="CharacterBody2D" unique_id=1709322112]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_8m66i")
+
+[node name="Sprite2D" type="Polygon2D" parent="." unique_id=1282982505]
+unique_name_in_owner = true
+scale = Vector2(0.14005558, 0.14005558)
+texture = ExtResource("1_tuclb")
+polygon = PackedVector2Array(-34.045105, -7.6930237, 18.754883, -20.15969, 19.48822, 28.24031)
+uv = PackedVector2Array(222.62161, 136.77367, 275.4216, 124.307, 276.15494, 172.707)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010467296]
+scale = Vector2(0.62766176, 0.62766176)
+shape = SubResource("CircleShape2D_tuclb")
+
+[node name="IceRubbleBreakSFX" type="AudioStreamPlayer2D" parent="." unique_id=912282010]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_hsftk")
+volume_db = -5.0
+pitch_scale = 1.3

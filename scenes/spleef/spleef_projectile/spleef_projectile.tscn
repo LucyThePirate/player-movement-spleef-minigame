@@ -36,10 +36,11 @@ width = 1.0
 [node name="ImpactSFX" type="AudioStreamPlayer2D" parent="." unique_id=334970208]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_0x5to")
+volume_db = 2.916
 pitch_scale = 1.71
 
 [node name="BounceSFX" type="AudioStreamPlayer2D" parent="." unique_id=1769203153]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_kh00k")
-volume_db = -5.832
+volume_db = -4.86
 pitch_scale = 1.37

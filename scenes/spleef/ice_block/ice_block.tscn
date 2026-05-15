@@ -2,6 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://jrb1g8ilpbxp" path="res://assets/textures/tiles/ChimeraTiles.png" id="1_glruj"]
 [ext_resource type="Script" uid="uid://ccwi2d32om6ca" path="res://scenes/spleef/ice_block/ice_block.gd" id="1_wegtn"]
+[ext_resource type="PackedScene" uid="uid://d14stouc1dk6b" path="res://scenes/spleef/ice_block/ice_rubble.tscn" id="2_hcarx"]
+[ext_resource type="AudioStream" uid="uid://bsln4g81h6pqb" path="res://assets/audio/SFX/ice_block/ice_crack1.wav" id="3_vs3ux"]
+[ext_resource type="AudioStream" uid="uid://dp5pdcrir85nk" path="res://assets/audio/SFX/ice_block/ice_crack2.wav" id="4_i34ao"]
+[ext_resource type="AudioStream" uid="uid://iadjw20kme4x" path="res://assets/audio/SFX/ice_block/ice_crack3.wav" id="5_hcarx"]
+[ext_resource type="AudioStream" uid="uid://xo2x4x2vtstb" path="res://assets/audio/SFX/ice_block/shatter.wav" id="6_i34ao"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_du1kx"]
 
@@ -9,9 +14,57 @@
 atlas = ExtResource("1_glruj")
 region = Rect2(200, 100, 100, 100)
 
+[sub_resource type="Gradient" id="Gradient_hcarx"]
+colors = PackedColorArray(0.90588236, 1, 1, 1, 0.5882353, 0.9098039, 0.9372549, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wgu21"]
+gradient = SubResource("Gradient_hcarx")
+
+[sub_resource type="Curve" id="Curve_hcarx"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 100), 0.0, 0.0, 0, 0, Vector2(0.07432431, 32.584274), 0.0, 0.0, 0, 0, Vector2(0.23648646, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_wgu21"]
+curve = SubResource("Curve_hcarx")
+
+[sub_resource type="Curve" id="Curve_wgu21"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14864865, 1), 0.0, 0.0, 0, 0, Vector2(0.7364865, 0.6629214), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_mgw7b"]
+curve = SubResource("Curve_wgu21")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcarx"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(49.25, 1, 1)
+gravity = Vector3(0, 98, 0)
+damping_min = 12.308001
+damping_max = 12.308001
+damping_curve = SubResource("CurveTexture_wgu21")
+scale_min = 1.53
+scale_max = 4.47
+scale_curve = SubResource("CurveTexture_mgw7b")
+color_initial_ramp = SubResource("GradientTexture1D_wgu21")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wgu21"]
+random_pitch = 1.0656005
+streams_count = 3
+stream_0/stream = ExtResource("3_vs3ux")
+stream_1/stream = ExtResource("4_i34ao")
+stream_2/stream = ExtResource("5_hcarx")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hcarx"]
+random_pitch = 1.0656005
+streams_count = 1
+stream_0/stream = ExtResource("6_i34ao")
+
 [node name="IceBlock" type="StaticBody2D" unique_id=861653759]
+collision_layer = 3
 collision_mask = 0
 script = ExtResource("1_wegtn")
+ice_rubble_scene = ExtResource("2_hcarx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=783395822]
 scale = Vector2(5, 5)
@@ -23,3 +76,26 @@ position = Vector2(0, -10.000001)
 scale = Vector2(0.19736892, 0.19736892)
 texture = SubResource("AtlasTexture_wegtn")
 offset = Vector2(0, 50.666542)
+
+[node name="MeltParticles" type="GPUParticles2D" parent="CollisionShape2D/Sprite2D" unique_id=1557737714]
+unique_name_in_owner = true
+position = Vector2(0, 99.30642)
+scale = Vector2(1.0133308, 1.0133308)
+emitting = false
+amount = 7
+lifetime = 0.74
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.35
+randomness = 0.65
+process_material = SubResource("ParticleProcessMaterial_hcarx")
+
+[node name="IceMeltingSFX" type="AudioStreamPlayer2D" parent="." unique_id=779617849]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_wgu21")
+volume_db = 5.832
+pitch_scale = 1.75
+
+[node name="IceBreakSFX" type="AudioStreamPlayer2D" parent="." unique_id=1037198748]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_hcarx")

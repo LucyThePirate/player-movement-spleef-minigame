@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dgldagpedskcp" path="res://assets/audio/SFX/peasint_cough3.wav" id="8_stj0r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xs056"]
+height = 28.0
 
 [sub_resource type="Animation" id="Animation_ct3br"]
 length = 0.001
@@ -79,6 +80,7 @@ script = ExtResource("1_evkmm")
 projectile_scene = ExtResource("2_ct3br")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2134808737]
+position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_xs056")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=53203061]
@@ -118,7 +120,7 @@ show_percentage = false
 [node name="ShootSFX" type="AudioStreamPlayer2D" parent="." unique_id=1505012870]
 unique_name_in_owner = true
 stream = ExtResource("4_dfnoe")
-volume_db = 9.02
+volume_db = 12.944
 
 [node name="ChargeSFX" type="AudioStreamPlayer2D" parent="." unique_id=781126444]
 unique_name_in_owner = true
